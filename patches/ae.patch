@@ -1,0 +1,45 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 4696418..bf8e892 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
+ 
+ project(LULESH CXX)
+ 
+-option(WITH_MPI    "Build LULESH with MPI"          TRUE)
++option(WITH_MPI    "Build LULESH with MPI"          FALSE)
+ option(WITH_OPENMP "Build LULESH with OpenMP"       TRUE)
+ option(WITH_SILO   "Build LULESH with silo support" FALSE)
+ 
+@@ -42,6 +42,8 @@ if (WITH_SILO)
+   endif()
+ endif()
+ 
++set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=znver1 -mtune=znver1 -mfma -mavx2 -m3dnow -fomit-frame-pointer")
++
+ set(LULESH_SOURCES
+   lulesh-comm.cc
+   lulesh-init.cc
+diff --git a/lulesh.cc b/lulesh.cc
+index c840817..fab101b 100644
+--- a/lulesh.cc
++++ b/lulesh.cc
+@@ -153,6 +153,7 @@ Additional BSD Notice
+ #include <time.h>
+ #include <sys/time.h>
+ #include <iostream>
++#include <iomanip>
+ #include <unistd.h>
+ 
+ #if _OPENMP
+@@ -2780,6 +2781,10 @@ int main(int argc, char *argv[])
+    
+    if ((myRank == 0) && (opts.quiet == 0)) {
+       VerifyAndWriteFinalOutput(elapsed_timeG, *locDom, opts.nx, numRanks);
++   } else {
++       std::cout << opts.nx << "," << opts.numReg << "," << locDom->cycle() << "," << omp_get_max_threads()
++                 << "," << elapsed_timeG << ","
++                 << std::scientific << std::setprecision(6) << std::setw(12) << locDom->e(0) << std::endl;
+    }
+ 
+    delete locDom; 
