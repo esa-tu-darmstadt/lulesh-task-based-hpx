@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13683379.svg)](https://doi.org/10.5281/zenodo.13683379)
+
 # Many-task-based HPX implementation of LULESH
 
 This is an HPX implementatoin of the LULESH proxy application using a many-task-based approach.
@@ -7,7 +9,7 @@ It is based on the OpenMP/MPI-based reference implementation found at https://gi
 
 This implementation is used for the following publication. You may use this repository to reproduce the presented results.
 
-[Kalkhof2024] Torben Kalkhof, and Andreas Koch. 2024. **Speeding-Up LULESH on HPX: Useful Tricks and Lessons Learned using a Many-Task-Based Approach**. In *The 7th Annual Parallel Applications Workshop, Alternatives To MPI+X (PAW-ATM)*. [Under Review]
+[Kalkhof2024] Torben Kalkhof, and Andreas Koch. 2024. **Speeding-Up LULESH on HPX: Useful Tricks and Lessons Learned using a Many-Task-Based Approach**. In *The 7th Annual Parallel Applications Workshop, Alternatives To MPI+X (PAW-ATM)*.
 
 ## Build
 
